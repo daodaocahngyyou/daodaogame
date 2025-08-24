@@ -1,0 +1,55 @@
+{
+  "name": "payboard-backend",
+  "version": "1.0.0",
+  "description": "PayBoard 会员充值订单管理系统后端API",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "nodemon src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest",
+    "db:sync": "ts-node scripts/sync-database.ts",
+    "db:init": "mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD < scripts/init-database.sql"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.2.1",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.4",
+    "mysql2": "^3.6.5",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.35.2",
+    "sequelize-typescript": "^2.1.6"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.8",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "payboard",
+    "member",
+    "recharge",
+    "task",
+    "management"
+  ],
+  "author": "PayBoard Team",
+  "license": "MIT"
+}
