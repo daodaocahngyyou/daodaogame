@@ -1,0 +1,124 @@
+version: '3.8'
+
+services:
+  # MySQL数据库
+  mysql:
+    image: mysql:8.0
+    container_name: daodao-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: daodao123456
+      MYSQL_DATABASE: daodao_gaming
+      MYSQL_USER: daodao_user
+      MYSQL_PASSWORD: daodao_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/scripts/init-database.sql:/docker-entrypoint-initdb.d/init-database.sql
+    networks:
+      - daodao-network
+
+  # Redis缓存
+  redis:
+    image: redis:7-alpine
+    container_name: daodao-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - daodao-network
+
+  # 后端API服务
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: daodao-backend
+    restart: unless-stopped
+    ports:
+      - "10000:10000"
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: daodao_user
+      DB_PASSWORD: daodao_pass
+      DB_NAME: daodao_gaming
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - daodao-network
+
+  # 前端服务
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: daodao-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - daodao-network
+
+  # Nginx反向代理
+  nginx:
+    image: nginx:alpine
+    container_name: daodao-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - daodao-network
+
+  # 监控服务
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: daodao-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - daodao-network
+
+  # Grafana仪表板
+  grafana:
+    image: grafana/grafana:latest
+    container_name: daodao-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - daodao-network
+
+volumes:
+  mysql_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  daodao-network:
+    driver: bridge

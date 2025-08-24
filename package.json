@@ -1,0 +1,18 @@
+{
+  "name": "payboard-fullstack",
+  "version": "1.0.0",
+  "description": "网吧代练管理系统 - 全栈项目",
+  "scripts": {
+    "dev:full": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build:all": "cd backend && npm run build && cd ../frontend && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": ["payboard", "fullstack", "vue3", "nodejs"],
+  "author": "PayBoard Team",
+  "license": "MIT"
+}
