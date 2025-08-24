@@ -7,6 +7,16 @@
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+## 🖼️ 项目展示
+
+<div align="center">
+  <img src="img/1065a18f7b61d1f6e77f8fae17c3d34d.png" alt="叨叨电竞系统界面1" width="45%" />
+  <img src="img/5bcf2e9aff017e901b1d638c88220050.png" alt="叨叨电竞系统界面2" width="45%" />
+  <br />
+  <img src="img/7828398f6b7d93fc8eae9b70a76bf710.png" alt="叨叨电竞系统界面3" width="45%" />
+  <img src="img/9b03d940b88b82fbe33b26e919ef8890.png" alt="叨叨电竞系统界面4" width="45%" />
+</div>
+
 ## 🏆 叨叨电竞品牌介绍
 
 **叨叨电竞** 是领先的三角洲陪玩俱乐部，致力于为用户提供专业、安全、便捷的陪玩服务体验。
@@ -18,6 +28,12 @@
 - 💰 **灵活支付方式** - 支持多种支付渠道，资金安全有保障
 - 📱 **便捷操作体验** - 简洁直观的界面设计，操作简单易上手
 - 🔄 **7×24小时服务** - 全天候在线，随时满足您的陪玩需求
+
+
+<div align="center">
+  <img src="img/wecaht.png" alt="叨叨电竞公众号" width="80%" />
+</div>
+
 
 ## 📖 项目简介
 
